@@ -7,5 +7,8 @@
  */
 interface IConnection
 {
+    /**
+     * @return string
+     */
     public function getDatabaseName() : string;
 }

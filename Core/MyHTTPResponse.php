@@ -7,15 +7,28 @@
  */
 require_once 'IResponse.php';
 
-class HTTPResponse implements IResponse
+/**
+ * Class MyHTTPResponse
+ */
+class MyHTTPResponse implements IResponse
 {
+    /**
+     * @var
+     */
     private $content;
 
+    /**
+     * MyHTTPResponse constructor.
+     * @param $content
+     */
     public function __construct($content)
     {
         $this->content = $content;
     }
 
+    /**
+     * @return string
+     */
     public function getContent() : string
     {
         return $this->content;

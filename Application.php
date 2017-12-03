@@ -5,10 +5,12 @@
  * Date: 02.12.17
  * Time: 16:46
  */
-require_once 'HTTPRequest.php';
-require_once 'DatabaseManager.php';
+require_once 'Core/IDatabaseManager.php';
+require_once 'Core/MyHTTPRequest.php';
+require_once 'Core/ISendable.php';
+require_once 'Core/IRunable.php';
 
-class Application
+class Application implements IRunable, ISendable
 {
     private const LOW_RANGE = 3;
     private const SIX = 6;
@@ -32,7 +34,7 @@ class Application
      */
     public function __construct()
     {
-        $this->config = parse_ini_file($GLOBALS['configPath'], true);
+        $this->config = $GLOBALS['config'];
     }
 
     /**
@@ -52,24 +54,20 @@ class Application
     }
 
     /**
-     * @param $value
-     * @return string
+     * @return bool
      */
-    public function run($value) : string
+    public function run(IRequest $request) : bool
     {
-        $request = new HTTPRequest($this->config['http']['url'] ?? "");
         $response = $request->send();
 
-        $this->dbManager->write($response->getContent());
-
-        return $this->sendEmail($value);
+        return $this->dbManager->write($response->getContent());
     }
 
     /**
      * @param $value
      * @return string
      */
-    private function sendEmail($value) : string
+    public function sendEmail(int $value) : string
     {
         if ($value <= self::LOW_RANGE) {
             $this->mailManager->setBody('Your Value is too low');

@@ -7,6 +7,14 @@
  */
 interface IMailManager
 {
+    /**
+     * @return string
+     */
     public function send() : string;
-    public function setBody(string $body) : void;
+
+    /**
+     * @param string $body
+     * @return mixed
+     */
+    public function setBody(string $body);
 }

@@ -50,7 +50,7 @@ class MailManager implements IMailManager
     /**
      * @param string $body
      */
-    public function setBody(string $body) : void
+    public function setBody(string $body)
     {
         $this->body = $body;
     }

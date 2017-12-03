@@ -8,9 +8,9 @@
 require_once 'IConnection.php';
 
 /**
- * Class DatabaseConnection
+ * Class FileDatabaseConnection
  */
-class DatabaseConnection implements IConnection
+class FileDatabaseConnection implements IConnection
 {
     /**
      * @var string
@@ -30,11 +30,9 @@ class DatabaseConnection implements IConnection
      */
     public function __construct()
     {
-        $config = parse_ini_file($GLOBALS['configPath'], true);
-
-        $this->dbName = $config['db']['baza'] ?? "";
-        $this->dbUser = $config['db']['login'] ?? "";
-        $this->dbPass = $config['db']['pass'] ?? "";
+        $this->dbName = $GLOBALS['config']['db']['baza'] ?? "";
+        $this->dbUser = $GLOBALS['config']['db']['login'] ?? "";
+        $this->dbPass = $GLOBALS['config']['db']['pass'] ?? "";
     }
 
     /**

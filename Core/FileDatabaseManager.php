@@ -5,13 +5,13 @@
  * Date: 02.12.17
  * Time: 16:23
  */
-require_once 'DatabaseConnection.php';
+require_once 'IConnection.php';
 require_once 'IDatabaseManager.php';
 
 /**
  * Class DatabaseManager
  */
-class DatabaseManager implements IDatabaseManager
+class FileDatabaseManager implements IDatabaseManager
 {
     /**
      * @var IConnection
@@ -28,18 +28,18 @@ class DatabaseManager implements IDatabaseManager
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function read() : string
+    public function read() : bool
     {
         return file_get_contents($this->databaseConnection->getDatabaseName());
     }
 
     /**
      * @param string $content
-     * @return string
+     * @return bool
      */
-    public function write(string $content) : string
+    public function write(string $content) : bool
     {
         return file_put_contents($this->databaseConnection->getDatabaseName(), $content, FILE_APPEND);
     }

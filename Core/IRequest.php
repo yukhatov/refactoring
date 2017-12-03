@@ -7,5 +7,8 @@
  */
 interface IRequest
 {
+    /**
+     * @return IResponse
+     */
     public function send() : IResponse;
 }
