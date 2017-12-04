@@ -5,6 +5,7 @@
  * Date: 02.12.17
  * Time: 17:12
  */
+namespace Core;
 
 require_once 'IMailManager.php';
 
