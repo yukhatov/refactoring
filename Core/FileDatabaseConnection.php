@@ -7,7 +7,7 @@
  */
 namespace Core;
 
-require_once 'IConnection.php';
+use Core\IConnection;
 
 /**
  * Class FileDatabaseConnection

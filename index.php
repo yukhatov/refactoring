@@ -5,10 +5,14 @@
  * Date: 02.12.17
  * Time: 17:27
  */
-/*require_once 'Application.php';
-require_once 'Core/MailManager.php';
-require_once 'Core/FileDatabaseManager.php';
-require_once 'Core/FileDatabaseConnection.php';*/
+//$loader = require_once __DIR__ . '/vendor/autoload.php';
+require 'vendor/autoload.php';
+
+use Core\FileDatabaseManager;
+use Core\FileDatabaseConnection;
+use Core\AHTTPRequest;
+use Core\MailManager;
+use App\Application;
 
 $GLOBALS['config'] = parse_ini_file(__DIR__ . '/config.ini', true);
 
@@ -19,5 +23,5 @@ $application = new Application();
 $application->setDbManager($dbManager);
 $application->setMailManager($mailManager);
 
-$application->run(new MyHTTPRequest($GLOBALS['config']['http']['url'] ?? ""));
+$application->run(new AHTTPRequest($GLOBALS['config']['http']['url'] ?? ""));
 $application->sendEmail(7);

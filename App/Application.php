@@ -5,12 +5,13 @@
  * Date: 02.12.17
  * Time: 16:46
  */
-namespace Core;
+namespace App;
 
-require_once 'Core/IDatabaseManager.php';
-require_once 'Core/MyHTTPRequest.php';
-require_once 'Core/ISendable.php';
-require_once 'Core/IRunable.php';
+use Core\IDatabaseManager;
+use Core\ISendable;
+use Core\IRunable;
+use Core\IMailManager;
+use Core\IRequest;
 
 class Application implements IRunable, ISendable
 {

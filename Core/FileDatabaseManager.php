@@ -7,8 +7,8 @@
  */
 namespace Core;
 
-require_once 'IConnection.php';
-require_once 'IDatabaseManager.php';
+use Core\IConnection;
+use Core\IDatabaseManager;
 
 /**
  * Class DatabaseManager

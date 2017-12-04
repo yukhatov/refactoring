@@ -7,13 +7,13 @@
  */
 namespace Core;
 
-require_once 'MyHTTPResponse.php';
-require_once 'IRequest.php';
+use Core\IRequest;
+use Core\IResponse;
 
 /**
- * Class MyHTTPRequest
+ * Class AHTTPRequest shortcut for ASCII Http request
  */
-class MyHTTPRequest implements IRequest
+class AHTTPRequest implements IRequest
 {
     /**
      * @var resource
@@ -21,7 +21,7 @@ class MyHTTPRequest implements IRequest
     private $ch;
 
     /**
-     * MyHTTPRequest constructor.
+     * AHTTPRequest constructor.
      * @param $url
      */
     public function __construct(string $url)
@@ -36,7 +36,7 @@ class MyHTTPRequest implements IRequest
      */
     public function send() : IResponse
     {
-        $response = new MyHTTPResponse(curl_exec($this->ch));
+        $response = new AHTTPResponse(curl_exec($this->ch));
 
         curl_close($this->ch);
 

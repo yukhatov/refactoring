@@ -7,12 +7,12 @@
  */
 namespace Core;
 
-require_once 'IResponse.php';
+use Core\IResponse;
 
 /**
- * Class MyHTTPResponse
+ * Class AHTTPResponse shortcut for ASCII Http response
  */
-class MyHTTPResponse implements IResponse
+class AHTTPResponse implements IResponse
 {
     /**
      * @var
@@ -20,7 +20,7 @@ class MyHTTPResponse implements IResponse
     private $content;
 
     /**
-     * MyHTTPResponse constructor.
+     * AHTTPResponse constructor.
      * @param $content
      */
     public function __construct($content)

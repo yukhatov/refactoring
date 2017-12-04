@@ -7,7 +7,7 @@
  */
 namespace Core;
 
-require_once 'IMailManager.php';
+use Core\IMailManager;
 
 /**
  * Class MailManager

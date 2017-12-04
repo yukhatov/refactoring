@@ -5,12 +5,14 @@
  * Date: 03.12.17
  * Time: 14:11
  */
-use PHPUnit\Framework\TestCase;
+require 'vendor/autoload.php';
 
-require_once 'Application.php';
-require_once 'Core/MailManager.php';
-require_once 'Core/FileDatabaseManager.php';
-require_once 'Core/FileDatabaseConnection.php';
+use PHPUnit\Framework\TestCase;
+use App\Application;
+use Core\MailManager;
+use Core\FileDatabaseManager;
+use Core\FileDatabaseConnection;
+use Core\AHTTPRequest;
 
 /**
  * @covers Application
@@ -40,6 +42,6 @@ class ApplicationTest extends TestCase
 
         $application->setDbManager(new FileDatabaseManager(new FileDatabaseConnection()));
 
-        $this->assertTrue($application->run(new MyHTTPRequest($GLOBALS['config']['http']['url'] ?? "")));
+        $this->assertTrue($application->run(new AHTTPRequest($GLOBALS['config']['http']['url'] ?? "")));
     }
 }
