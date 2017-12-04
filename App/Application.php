@@ -12,13 +12,15 @@ use Core\ISendable;
 use Core\IRunable;
 use Core\IMailManager;
 use Core\IRequest;
+use Core\IValidator;
+use Core\Validator;
 
+/**
+ * Class Application
+ * @package App
+ */
 class Application implements IRunable, ISendable
 {
-    private const LOW_RANGE = 3;
-    private const SIX = 6;
-    private const SEVEN = 7;
-
     /**
      * @var array|bool
      */
@@ -31,6 +33,11 @@ class Application implements IRunable, ISendable
      * @var IMailManager
      */
     private $mailManager;
+
+    /**
+     * @var IValidator
+     */
+    private $validator;
 
     /**
      * Application constructor.
@@ -57,6 +64,14 @@ class Application implements IRunable, ISendable
     }
 
     /**
+     * @param IValidator $validator
+     */
+    public function setValidator(IValidator $validator)
+    {
+        $this->validator = $validator;
+    }
+
+    /**
      * @return bool
      */
     public function run(IRequest $request) : bool
@@ -72,17 +87,7 @@ class Application implements IRunable, ISendable
      */
     public function sendEmail(int $value) : string
     {
-        if ($value <= self::LOW_RANGE) {
-            $this->mailManager->setBody('Your Value is too low');
-        } elseif ($value > self::SIX) {
-            if ($value == self::SEVEN) {
-                $this->mailManager->setBody('Your Value equals to 7');
-            } else {
-                $this->mailManager->setBody('Your Value is over 7');
-            }
-        } else {
-            $this->mailManager->setBody('Your Value is between 3 and 6');
-        }
+        $this->mailManager->setBody($this->validator->validate($value));
 
         return $this->mailManager->send();
     }

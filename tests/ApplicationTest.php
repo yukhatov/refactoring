@@ -13,6 +13,7 @@ use Core\MailManager;
 use Core\FileDatabaseManager;
 use Core\FileDatabaseConnection;
 use Core\AHTTPRequest;
+use Core\Validator;
 
 /**
  * @covers Application
@@ -30,6 +31,7 @@ class ApplicationTest extends TestCase
         $application = new Application();
 
         $application->setMailManager(new MailManager('test@gmail.com', 'admin@provectus.com'));
+        $application->setValidator(new Validator());
 
         $this->assertStringEndsWith("too low", $application->sendEmail(2));
         $this->assertStringEndsWith("between 3 and 6", $application->sendEmail(5));

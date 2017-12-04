@@ -41,6 +41,22 @@ class MailManager implements IMailManager
     }
 
     /**
+     * @param string $receiver
+     */
+    public function setReceiver(string $receiver)
+    {
+        $this->receiver = $receiver;
+    }
+
+    /**
+     * @param string $sender
+     */
+    public function setSender(string $sender)
+    {
+        $this->sender = $sender;
+    }
+
+    /**
      * @return string
      */
     public function send() : string
