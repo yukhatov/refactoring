@@ -5,6 +5,8 @@
  * Date: 02.12.17
  * Time: 16:46
  */
+namespace Core;
+
 require_once 'Core/IDatabaseManager.php';
 require_once 'Core/MyHTTPRequest.php';
 require_once 'Core/ISendable.php';

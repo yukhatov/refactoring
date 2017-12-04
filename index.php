@@ -5,10 +5,10 @@
  * Date: 02.12.17
  * Time: 17:27
  */
-require_once 'Application.php';
+/*require_once 'Application.php';
 require_once 'Core/MailManager.php';
 require_once 'Core/FileDatabaseManager.php';
-require_once 'Core/FileDatabaseConnection.php';
+require_once 'Core/FileDatabaseConnection.php';*/
 
 $GLOBALS['config'] = parse_ini_file(__DIR__ . '/config.ini', true);
 

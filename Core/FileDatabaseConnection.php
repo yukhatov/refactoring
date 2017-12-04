@@ -5,6 +5,8 @@
  * Date: 02.12.17
  * Time: 16:18
  */
+namespace Core;
+
 require_once 'IConnection.php';
 
 /**
