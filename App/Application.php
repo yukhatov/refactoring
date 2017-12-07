@@ -7,13 +7,12 @@
  */
 namespace App;
 
-use Core\IDatabaseManager;
-use Core\ISendable;
-use Core\IRunable;
-use Core\IMailManager;
-use Core\IRequest;
-use Core\IValidator;
-use Core\Validator;
+use Interfaces\IDatabaseManager;
+use Interfaces\ISendable;
+use Interfaces\IRunable;
+use Interfaces\IMailManager;
+use Interfaces\IRequest;
+use Interfaces\IValidator;
 
 /**
  * Class Application

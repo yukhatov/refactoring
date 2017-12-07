@@ -5,12 +5,12 @@
  * Date: 02.12.17
  * Time: 19:57
  */
-namespace Core;
+namespace Interfaces;
 
-interface IConnection
+interface IResponse
 {
     /**
      * @return string
      */
-    public function getDatabaseName() : string;
+    public function getContent() : string;
 }

@@ -3,9 +3,10 @@
         "phpunit/phpunit": "^6.5"
     },
     "autoload": {
-        "classmap": [
-            "Core/",
-            "App/"
-        ]
+        "psr-4": {
+            "Classes\\" : "Core/Classes/",
+            "App\\" : "App/",
+            "Interfaces\\" : "Core/Interfaces/"
+        }
     }
 }

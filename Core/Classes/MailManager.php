@@ -5,9 +5,9 @@
  * Date: 02.12.17
  * Time: 17:12
  */
-namespace Core;
+namespace Classes;
 
-use Core\IMailManager;
+use Interfaces\IMailManager;
 
 /**
  * Class MailManager

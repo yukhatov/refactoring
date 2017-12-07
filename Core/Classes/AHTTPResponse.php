@@ -5,9 +5,9 @@
  * Date: 02.12.17
  * Time: 16:50
  */
-namespace Core;
+namespace Classes;
 
-use Core\IResponse;
+use Interfaces\IResponse;
 
 /**
  * Class AHTTPResponse shortcut for ASCII Http response

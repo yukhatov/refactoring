@@ -7,17 +7,22 @@
  */
 require 'vendor/autoload.php';
 
-use Core\FileDatabaseManager;
-use Core\FileDatabaseConnection;
-use Core\AHTTPRequest;
-use Core\MailManager;
+use Classes\FileDatabaseManager;
+use Classes\FileDatabaseConnection;
+use Classes\AHTTPRequest;
+use Classes\MailManager;
 use App\Application;
-use Core\Validator;
+use Classes\Validator;
 
 $GLOBALS['config'] = parse_ini_file(__DIR__ . '/config.ini', true);
 
+$dbConnection = new FileDatabaseConnection(
+    $GLOBALS['config']['db']['baza'] ?? "",
+    $GLOBALS['config']['db']['login'] ?? "",
+    $GLOBALS['config']['db']['pass'] ?? ""
+);
 $mailManager = new MailManager('test@gmail.com', 'admin@provectus.com');
-$dbManager = new FileDatabaseManager(new FileDatabaseConnection());
+$dbManager = new FileDatabaseManager($dbConnection);
 $application = new Application();
 $validator = new Validator();
 

@@ -5,10 +5,10 @@
  * Date: 02.12.17
  * Time: 16:23
  */
-namespace Core;
+namespace Classes;
 
-use Core\IConnection;
-use Core\IDatabaseManager;
+use Interfaces\IConnection;
+use Interfaces\IDatabaseManager;
 
 /**
  * Class DatabaseManager

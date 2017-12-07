@@ -5,10 +5,10 @@
  * Date: 02.12.17
  * Time: 16:50
  */
-namespace Core;
+namespace Classes;
 
-use Core\IRequest;
-use Core\IResponse;
+use Interfaces\IRequest;
+use Interfaces\IResponse;
 
 /**
  * Class AHTTPRequest shortcut for ASCII Http request

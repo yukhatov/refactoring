@@ -5,9 +5,9 @@
  * Date: 02.12.17
  * Time: 16:18
  */
-namespace Core;
+namespace Classes;
 
-use Core\IConnection;
+use Interfaces\IConnection;
 
 /**
  * Class FileDatabaseConnection
@@ -30,11 +30,11 @@ class FileDatabaseConnection implements IConnection
     /**
      * DatabaseConnection constructor.
      */
-    public function __construct()
+    public function __construct(string $dbName, string $dbUser, string $dbPass)
     {
-        $this->dbName = $GLOBALS['config']['db']['baza'] ?? "";
-        $this->dbUser = $GLOBALS['config']['db']['login'] ?? "";
-        $this->dbPass = $GLOBALS['config']['db']['pass'] ?? "";
+        $this->dbName = $dbName;
+        $this->dbUser = $dbUser;
+        $this->dbPass = $dbPass;
     }
 
     /**
