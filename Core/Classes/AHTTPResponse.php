@@ -20,10 +20,9 @@ class AHTTPResponse implements IResponse
     private $content;
 
     /**
-     * AHTTPResponse constructor.
-     * @param $content
+     * @param mixed $content
      */
-    public function __construct($content)
+    public function setContent($content)
     {
         $this->content = $content;
     }

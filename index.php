@@ -10,6 +10,7 @@ require 'vendor/autoload.php';
 use Classes\FileDatabaseManager;
 use Classes\FileDatabaseConnection;
 use Classes\AHTTPRequest;
+use Classes\AHTTPResponse;
 use Classes\MailManager;
 use App\Application;
 use Classes\Validator;
@@ -30,5 +31,5 @@ $application->setMailManager($mailManager);
 $application->setDbManager($dbManager);
 $application->setValidator($validator);
 
-$application->run(new AHTTPRequest($GLOBALS['config']['http']['url'] ?? ""));
+$application->run(new AHTTPRequest($GLOBALS['config']['http']['url'] ?? "", new AHTTPResponse()));
 echo $application->sendEmail(7);

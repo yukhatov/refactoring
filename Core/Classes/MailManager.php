@@ -65,7 +65,8 @@ class MailManager implements IMailManager
             "Email has been send to %s From %s.\r\n\r\n Notify you about %s",
             $this->receiver,
             $this->sender,
-            $this->body);
+            $this->body
+        );
     }
 
     /**

@@ -21,12 +21,19 @@ class AHTTPRequest implements IRequest
     private $ch;
 
     /**
-     * AHTTPRequest constructor.
-     * @param $url
+     * @var IResponse
      */
-    public function __construct(string $url)
+    private $response;
+
+    /**
+     * AHTTPRequest constructor.
+     * @param string $url
+     * @param IResponse $response
+     */
+    public function __construct(string $url, IResponse $response)
     {
-        $this->ch = curl_init($GLOBALS['config']['http']['url'] ?? "");
+        $this->response = $response;
+        $this->ch = curl_init($url);
 
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
     }
@@ -36,10 +43,10 @@ class AHTTPRequest implements IRequest
      */
     public function send() : IResponse
     {
-        $response = new AHTTPResponse(curl_exec($this->ch));
+        $this->response->setContent(curl_exec($this->ch));
 
         curl_close($this->ch);
 
-        return $response;
+        return $this->response;
     }
 }
