@@ -61,7 +61,11 @@ class MailManager implements IMailManager
      */
     public function send() : string
     {
-        return sprintf("Email has been send to %s From %s.\r\n\r\n Notify you about %s", $this->receiver, $this->sender, $this->body);
+        return sprintf(
+            "Email has been send to %s From %s.\r\n\r\n Notify you about %s",
+            $this->receiver,
+            $this->sender,
+            $this->body);
     }
 
     /**
