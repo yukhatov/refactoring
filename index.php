@@ -27,10 +27,11 @@ try {
         new MailManager('test@gmail.com', 'admin@provectus.com'),
         new Validator()
     );
-    
+
+    /* run() returns value but we are not gonna use it below so no variable assigned  */
     $application->run(new AHTTPRequest($config['http']['url'] ?? ""));
     
     $application->sendEmail(7);
 } catch (Exception $e){
-    die($e->getMessage());
+    echo "Woops... sorry!";
 }

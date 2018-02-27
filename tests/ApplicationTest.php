@@ -42,12 +42,12 @@ class ApplicationTest extends TestCase
         );
     }
 
-    public function testRunRequest() : void
+    /**
+     * @expectedException        Exception
+     * @expectedExceptionMessage Request error
+     */
+    public function testRunRequestError() : void
     {
-        try {
-            $this->application->run(new AHTTPRequest(""));
-        } catch (Exception $e) {
-            $this->assertContains('Request error', $e->getMessage());
-        }
+        $this->application->run(new AHTTPRequest(""));
     }
 }
