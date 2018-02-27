@@ -10,7 +10,6 @@ require 'vendor/autoload.php';
 use Classes\FileDatabaseManager;
 use Classes\FileDatabaseConnection;
 use Classes\AHTTPRequest;
-use Classes\AHTTPResponse;
 use Classes\MailManager;
 use App\Application;
 use Classes\Validator;
@@ -21,14 +20,15 @@ $dbConnection = new FileDatabaseConnection(
     $config['db']['login'] ?? "",
     $config['db']['pass'] ?? ""
 );
-$application = new Application(
-    new FileDatabaseManager($dbConnection),
-    new MailManager('test@gmail.com', 'admin@provectus.com'),
-    new Validator()
-);
 
 try {
-    $response = new AHTTPResponse($application->run(new AHTTPRequest($config['http']['url'] ?? "")));
+    $application = new Application(
+        new FileDatabaseManager($dbConnection),
+        new MailManager('test@gmail.com', 'admin@provectus.com'),
+        new Validator()
+    );
+    
+    $application->run(new AHTTPRequest($config['http']['url'] ?? ""));
     
     $application->sendEmail(7);
 } catch (Exception $e){

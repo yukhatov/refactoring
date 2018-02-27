@@ -49,6 +49,9 @@ class Application implements IRunable, ISendable
 
     /**
      * @param IRequest $request
+     * 
+     * @throws Exception if the provided url is broken or db conction is broken.
+     *     
      * @return string
      */
     public function run(IRequest $request) : string
@@ -66,6 +69,9 @@ class Application implements IRunable, ISendable
 
     /**
      * @param $value
+     * 
+     * @throws Exception if emailcould not be sent.
+     * 
      * @return mixed
      */
     public function sendEmail(int $value)
