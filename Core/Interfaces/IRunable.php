@@ -7,17 +7,15 @@
  */
 namespace Interfaces;
 
+/**
+ * Interface IRunable
+ * @package Interfaces
+ */
 interface IRunable
 {
     /**
      * @param IRequest $request
-     * @return bool
+     * @return string
      */
-    public function run(IRequest $request) : bool;
-
-    /**
-     * @param IDatabaseManager $dbManager
-     * @return mixed
-     */
-    public function setDbManager(IDatabaseManager $dbManager);
+    public function run(IRequest $request) : string;
 }

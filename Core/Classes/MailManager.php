@@ -41,32 +41,25 @@ class MailManager implements IMailManager
     }
 
     /**
-     * @param string $receiver
+     * @return bool
      */
-    public function setReceiver(string $receiver)
+    public function send() : bool
     {
-        $this->receiver = $receiver;
-    }
+        /* Send email here and check if it's sent */
+        $isEmailSent = true;
 
-    /**
-     * @param string $sender
-     */
-    public function setSender(string $sender)
-    {
-        $this->sender = $sender;
-    }
-
-    /**
-     * @return string
-     */
-    public function send() : string
-    {
-        return sprintf(
-            "Email has been send to %s From %s.\r\n\r\n Notify you about %s",
-            $this->receiver,
-            $this->sender,
-            $this->body
-        );
+        if ($isEmailSent) {
+            echo sprintf(
+                "Email has been send to %s From %s. Notify you about %s",
+                $this->receiver,
+                $this->sender,
+                $this->body
+            );
+            
+            return true;
+        }
+        
+        return false;
     }
 
     /**

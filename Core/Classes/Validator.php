@@ -15,9 +15,9 @@ use Interfaces\IValidator;
  */
 class Validator implements IValidator
 {
-    private const LOW_RANGE = 3;
-    private const SIX = 6;
-    private const SEVEN = 7;
+    const LOW_RANGE = 3;
+    const SIX = 6;
+    const SEVEN = 7;
 
     /**
      * @param $value

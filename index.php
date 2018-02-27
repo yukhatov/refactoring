@@ -15,21 +15,22 @@ use Classes\MailManager;
 use App\Application;
 use Classes\Validator;
 
-$GLOBALS['config'] = parse_ini_file(__DIR__ . '/config.ini', true);
-
+$config = parse_ini_file(__DIR__ . '/config.ini', true);
 $dbConnection = new FileDatabaseConnection(
-    $GLOBALS['config']['db']['baza'] ?? "",
-    $GLOBALS['config']['db']['login'] ?? "",
-    $GLOBALS['config']['db']['pass'] ?? ""
+    $config['db']['baza'] ?? "",
+    $config['db']['login'] ?? "",
+    $config['db']['pass'] ?? ""
 );
-$mailManager = new MailManager('test@gmail.com', 'admin@provectus.com');
-$dbManager = new FileDatabaseManager($dbConnection);
-$application = new Application();
-$validator = new Validator();
+$application = new Application(
+    new FileDatabaseManager($dbConnection),
+    new MailManager('test@gmail.com', 'admin@provectus.com'),
+    new Validator()
+);
 
-$application->setMailManager($mailManager);
-$application->setDbManager($dbManager);
-$application->setValidator($validator);
-
-$application->run(new AHTTPRequest($GLOBALS['config']['http']['url'] ?? "", new AHTTPResponse()));
-echo $application->sendEmail(7);
+try {
+    $response = new AHTTPResponse($application->run(new AHTTPRequest($config['http']['url'] ?? "")));
+    
+    $application->sendEmail(7);
+} catch (Exception $e){
+    die($e->getMessage());
+}

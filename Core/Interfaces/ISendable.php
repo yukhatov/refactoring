@@ -7,17 +7,16 @@
  */
 namespace Interfaces;
 
+/**
+ * Interface ISendable
+ * @package Interfaces
+ */
 interface ISendable
 {
-    /**
-     * @param int $value
-     * @return string
-     */
-    public function sendEmail(int $value) : string;
 
     /**
-     * @param IMailManager $mailManager
+     * @param int $value
      * @return mixed
      */
-    public function setMailManager(IMailManager $mailManager);
+    public function sendEmail(int $value);
 }

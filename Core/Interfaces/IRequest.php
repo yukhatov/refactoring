@@ -10,7 +10,7 @@ namespace Interfaces;
 interface IRequest
 {
     /**
-     * @return IResponse
+     * @return string
      */
-    public function send() : IResponse;
+    public function send() : string;
 }

@@ -21,10 +21,6 @@ use Interfaces\IValidator;
 class Application implements IRunable, ISendable
 {
     /**
-     * @var array|bool
-     */
-    private $config;
-    /**
      * @var IDatabaseManager
      */
     private $dbManager;
@@ -40,54 +36,44 @@ class Application implements IRunable, ISendable
 
     /**
      * Application constructor.
-     */
-    public function __construct()
-    {
-        $this->config = $GLOBALS['config'];
-    }
-
-    /**
      * @param IDatabaseManager $dbManager
-     */
-    public function setDbManager(IDatabaseManager $dbManager)
-    {
-        $this->dbManager = $dbManager;
-    }
-
-    /**
      * @param IMailManager $mailManager
-     */
-    public function setMailManager(IMailManager $mailManager)
-    {
-        $this->mailManager = $mailManager;
-    }
-
-    /**
      * @param IValidator $validator
      */
-    public function setValidator(IValidator $validator)
+    public function __construct(IDatabaseManager $dbManager, IMailManager $mailManager, IValidator $validator)
     {
+        $this->dbManager = $dbManager;
+        $this->mailManager = $mailManager;
         $this->validator = $validator;
     }
 
     /**
-     * @return bool
+     * @param IRequest $request
+     * @return string
      */
-    public function run(IRequest $request) : bool
+    public function run(IRequest $request) : string
     {
-        $response = $request->send();
+        if (!$content = $request->send()) {
+            throw new \Exception("Request error: Unable to send request!");
+        }
+        
+        if (!$this->dbManager->write($content)) {
+            throw new \Exception("Database manager error: Unable to write data!");
+        }
 
-        return $this->dbManager->write($response->getContent());
+        return $content;
     }
 
     /**
      * @param $value
-     * @return string
+     * @return mixed
      */
-    public function sendEmail(int $value) : string
+    public function sendEmail(int $value)
     {
         $this->mailManager->setBody($this->validator->validate($value));
 
-        return $this->mailManager->send();
+        if (!$this->mailManager->send()) {
+            throw new \Exception("Mail manager error: email could not be sent!");
+        }
     }
 }

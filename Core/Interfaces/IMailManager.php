@@ -7,12 +7,16 @@
  */
 namespace Interfaces;
 
+/**
+ * Interface IMailManager
+ * @package Interfaces
+ */
 interface IMailManager
 {
     /**
-     * @return string
+     * @return bool
      */
-    public function send() : string;
+    public function send() : bool;
 
     /**
      * @param string $body

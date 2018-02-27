@@ -8,7 +8,6 @@
 namespace Classes;
 
 use Interfaces\IRequest;
-use Interfaces\IResponse;
 
 /**
  * Class AHTTPRequest shortcut for ASCII Http request
@@ -21,32 +20,25 @@ class AHTTPRequest implements IRequest
     private $ch;
 
     /**
-     * @var IResponse
-     */
-    private $response;
-
-    /**
      * AHTTPRequest constructor.
      * @param string $url
-     * @param IResponse $response
      */
-    public function __construct(string $url, IResponse $response)
+    public function __construct(string $url)
     {
-        $this->response = $response;
         $this->ch = curl_init($url);
 
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
     }
 
     /**
-     * @return IResponse
+     * @return string
      */
-    public function send() : IResponse
+    public function send() : string
     {
-        $this->response->setContent(curl_exec($this->ch));
+        $content = curl_exec($this->ch);
 
         curl_close($this->ch);
 
-        return $this->response;
+        return $content;
     }
 }

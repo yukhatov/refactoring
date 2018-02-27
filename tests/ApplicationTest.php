@@ -9,41 +9,45 @@ require 'vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
 use App\Application;
-use Core\MailManager;
-use Core\FileDatabaseManager;
-use Core\FileDatabaseConnection;
-use Core\AHTTPRequest;
-use Core\Validator;
+use Classes\MailManager;
+use Classes\FileDatabaseManager;
+use Classes\FileDatabaseConnection;
+use Classes\AHTTPRequest;
+use Classes\Validator;
 
 /**
  * @covers Application
  */
 class ApplicationTest extends TestCase
 {
+    private $config;
+    
+    private $application;
+    
     public function __construct($name = null, array $data = [], $dataName = '')
     {
         parent::__construct($name, $data, $dataName);
-        $GLOBALS['config'] = parse_ini_file(__DIR__ . '/../config.ini', true);
+
+        $this->config = parse_ini_file(__DIR__ . '/../config.ini', true);
+        $dbConnection = new FileDatabaseConnection(
+            $this->config['db']['baza'] ?? "",
+            $this->config['db']['login'] ?? "",
+            $this->config['db']['pass'] ?? ""
+        );
+
+        $this->application = new Application(
+            new FileDatabaseManager($dbConnection),
+            new MailManager('test@gmail.com', 'admin@provectus.com'),
+            new Validator()
+        );
     }
 
-    public function testSendEmail() : void
+    public function testRunRequest() : void
     {
-        $application = new Application();
-
-        $application->setMailManager(new MailManager('test@gmail.com', 'admin@provectus.com'));
-        $application->setValidator(new Validator());
-
-        $this->assertStringEndsWith("too low", $application->sendEmail(2));
-        $this->assertStringEndsWith("between 3 and 6", $application->sendEmail(5));
-        $this->assertStringEndsWith("over 7", $application->sendEmail(8));
-    }
-
-    public function testRun() : void
-    {
-        $application = new Application();
-
-        $application->setDbManager(new FileDatabaseManager(new FileDatabaseConnection()));
-
-        $this->assertTrue($application->run(new AHTTPRequest($GLOBALS['config']['http']['url'] ?? "")));
+        try {
+            $this->application->run(new AHTTPRequest(""));
+        } catch (Exception $e) {
+            $this->assertContains('Request error', $e->getMessage());
+        }
     }
 }
